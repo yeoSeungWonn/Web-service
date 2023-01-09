@@ -5,9 +5,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import springboot.webservice.domain.post.Post;
 import springboot.webservice.domain.post.PostRepository;
+import springboot.webservice.dto.PostListResponseDto;
 import springboot.webservice.dto.PostResponseDto;
 import springboot.webservice.dto.PostSaveRequestDto;
 import springboot.webservice.dto.PostUpdateRequestDto;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -36,5 +40,19 @@ public class PostService {
                 () -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
 
         return new PostResponseDto(post);
+    }
+
+    public List<PostListResponseDto> findAllDesc() {
+        return postRepository.findAllDesc().stream()
+                .map(PostListResponseDto::new).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        Post post = postRepository.findById(id).orElseThrow(
+                () -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id)
+        );
+
+        postRepository.delete(post);
     }
 }
