@@ -45,6 +45,6 @@ class HelloControllerTest {
                 })
                 .andExpect(r -> {jsonPath("$.amount", is(amount));});
     }
-    //이제는 andExpect가  ResultMatcher만을 파라미터로 받는다. 
+    //이제는 andExpect가  ResultMatcher만을 파라미터로 받는다.
 
 }
