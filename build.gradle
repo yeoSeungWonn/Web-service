@@ -28,6 +28,12 @@ dependencies {
 
     //mustache
     implementation 'org.springframework.boot:spring-boot-starter-mustache'
+
+    //oauth2
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
+    //데이터베이스를 세션 저장소로 사용하기 위한 의존성 추기
+    implementation 'org.springframework.session:spring-session-jdbc'
 }
 
 tasks.named('test') {
